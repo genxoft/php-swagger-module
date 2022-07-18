@@ -1,0 +1,53 @@
+{
+    "name": "genxoft/swagger-php-module",
+    "description": "Swagger-PHP module adapted for mezzio and laminas.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simon Rodin",
+            "email": "dev@genxoft.dev"
+        }
+    ],
+    "require": {
+        "php": "^7.4 | ^8.0 | ^8.1",
+        "mezzio/mezzio": "^3.11",
+        "psr/container": "^1.1.2",
+        "psr/http-server-handler": "^1.0.1",
+        "laminas/laminas-config-aggregator": "^1.7",
+        "laminas-api-tools/api-tools-asset-manager": "^1.5",
+        "zircote/swagger-php": "^4.4"
+    },
+    "require-dev": {
+        "mezzio/mezzio-fastroute": "^3.5",
+        "laminas/laminas-diactoros": "^2.13",
+        "mezzio/mezzio-problem-details": "^1.6",
+        "mezzio/mezzio-laminasviewrenderer": "^2.6",
+        "phpunit/phpunit": "^9.5",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Genxoft\\SwaggerPhpModule\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Genxoft\\SwaggerPhpModule\\Test\\": "test/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "laminas-api-tools/api-tools-asset-manager": true
+        }
+    },
+    "extra": {
+        "laminas": {
+            "config-provider": "Genxoft\\SwaggerPhpModule\\ConfigProvider"
+        }
+    },
+    "scripts": {
+        "php-cs-fixer": "vendor/bin/php-cs-fixer fix",
+        "test": "phpunit --colors=always"
+    }
+}

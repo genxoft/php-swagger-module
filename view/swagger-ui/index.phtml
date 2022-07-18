@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @var \Laminas\View\Renderer\PhpRenderer $this
+ * @var string $oasJsonUrl
+ * @var string $basePath
+ */
+
+$initScript = <<<JS
+window.onload = function() {
+  //<editor-fold desc="Changeable Configuration Block">
+
+  // the following lines will be replaced by docker/configurator, when it runs in a docker-container
+  window.ui = SwaggerUIBundle({
+    url: "{$oasJsonUrl}",
+    dom_id: '#swagger-ui',
+    deepLinking: true,
+    presets: [
+      SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset
+    ],
+    plugins: [
+      SwaggerUIBundle.plugins.DownloadUrl
+    ],
+    layout: "StandaloneLayout"
+  });
+
+  //</editor-fold>
+};
+JS;
+
+
+$this->headTitle("Swagger UI");
+
+$this->headLink()
+    ->appendStylesheet($basePath . 'swagger-ui/swagger-ui.css')
+    ->appendStylesheet($basePath . 'swagger-ui/index.css');
+
+
+$this->inlineScript()
+    ->appendFile($basePath . 'swagger-ui/swagger-ui-bundle.js')
+    ->appendFile($basePath . 'swagger-ui/swagger-ui-standalone-preset.js')
+    ->appendScript($initScript);
+
+?>
+<div id="swagger-ui"></div>
